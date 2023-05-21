@@ -1,5 +1,4 @@
 <?php
-
 class Inventory
 {
     /**
@@ -7,7 +6,7 @@ class Inventory
      *
      */
     public function connectDb() {
-        $dbcon=mysqli_connect("mysql-server","root","secret");
+        $dbcon = mysqli_connect("localhost","root","");
         mysqli_select_db($dbcon,"inventorydb");
         return $dbcon;
     }
@@ -20,11 +19,9 @@ class Inventory
     {
         $items = "SELECT req_id, requested_by, concat(item, ',','Pen') AS item, value FROM items INNER JOIN itemType ON itemType.id = items.item_type INNER join requests ON SUBSTR(requests.items,3,1) = items.id;";
         $data = [];
-        $dbcon=mysqli_connect("mysql-server","root","secret");
-        mysqli_select_db($dbcon,"inventorydb");
-        mysqli_set_charset($dbcon, "utf8");
+        $dbcon = $this->connectDb();
         $result = mysqli_query($dbcon, $items);
-        while($row = mysqli_fetch_assoc($result))
+        while ($row = mysqli_fetch_assoc($result))
         {
             $data[] = $row;
         }
@@ -63,7 +60,7 @@ if (isset($_POST['add']))
 
     $result = mysqli_query($dbcon, $item);
 
-    while($row = mysqli_fetch_assoc($result))
+    while ($row = mysqli_fetch_assoc($result))
     {
         $type[] = $row['item_type'];
         $itemId .= "{" .$row['id'] .  ",".$row['item_type']."},";
@@ -104,10 +101,8 @@ if (isset($_POST['edit']))
     $id = $_POST['updateId'];
     if (isset($_POST['items1'])) {
         $items = [];
-
         foreach ($_POST['items1'] as $item)
             $items[] = $item;
-
     }
     $items = implode("','", $items);
 

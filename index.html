@@ -1,0 +1,103 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/styles.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="js/inventory.js"></script>
+
+<html>
+<body>
+<h1 class="text-primary">Inventory Management</h1><br>
+
+<!--Add Form-->
+<form class="form-inline" id="addForm" method="POST" action="Inventory.php" style="display: none;">
+    <fieldset>
+        <div class="form-group"  >
+            <label for="user">User : </label>
+            <input type="text" class="form-control" name="user" id="user" required>
+        </div>
+        <br/><br/>
+        <div class="form-group">
+            <div id="container" class="left">
+                <label for="items">Requested Items : </label>
+                <select name="items[]" id="items" class="form-control">
+                    <option value="Pen">Pen</option>
+                    <option value="Printer">Printer</option>
+                    <option value="Marker">Marker</option>
+                    <option value="Scanner">Scanner</option>
+                    <option value="Clear Tape">Clear Tape</option>
+                    <option value="Standing Table">Standing Table</option>
+                    <option value="Shredder">Shredder</option>
+                    <option value="Thumbtack">Thumbtack</option>
+                    <option value="Paper Clip">Paper Clip</option>
+                    <option value="A4 Sheet">A4 Sheet</option>
+                    <option value="Notebook">Notebook</option>
+                    <option value="Chair">Chair</option>
+                </select>
+
+                <a id="generate" onclick="addDropDown();">Add Items</a>
+                <br>
+            </div>
+
+        </div>
+        <br/><br/><br/>
+        <input type="submit" name="add" value="Add Request" class="btn btn-primary" /><hr/>
+
+    </fieldset>
+</form>
+
+<!--Edit Form-->
+<form class="form-inline" id="editForm" method="POST" action="Inventory.php" style="display: none;">
+    <fieldset>
+        <div class="form-group"  >
+            <label for="user1">User : </label>
+            <input type="text" class="form-control" name="user1" id="user1" required>
+        </div>
+        <br/><br/>
+        <div class="form-group">
+            <div id="container1" class="left">
+            <label for="items1">Requested Items : </label>
+            <select name="items1[]" id="items1" class="form-control" multiple>
+                <option value="Pen">Pen</option>
+                <option value="Printer">Printer</option>
+                <option value="Marker">Marker</option>
+                <option value="Scanner">Scanner</option>
+                <option value="Clear Tape">Clear Tape</option>
+                <option value="Standing Table">Standing Table</option>
+                <option value="Shredder">Shredder</option>
+                <option value="Thumbtack">Thumbtack</option>
+                <option value="Paper Clip">Paper Clip</option>
+                <option value="A4 Sheet">A4 Sheet</option>
+                <option value="Notebook">Notebook</option>
+                <option value="Chair">Chair</option>
+            </select>
+            <!--<div id="container"></div>
+            <button id="generate" onclick="addDropDown();">Add More</button>-->
+        </div>
+        <br/><br/><br/>
+        <input type="hidden" id="updateId" name="updateId">
+        <input type="submit" name="edit" value="Edit Request" class="btn btn-primary" /><hr/>
+
+    </fieldset>
+</form>
+
+<div id="dbTable">
+<button id="myButton" class="btn btn-primary" onclick="showAddForm();">Add Request</button>
+<table id="example" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th>Action</th>
+        <th>User</th>
+        <th>Requested Items</th>
+        <th>Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
+
